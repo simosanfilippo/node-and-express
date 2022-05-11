@@ -4,12 +4,14 @@
         "name":"Latte",
         "weight":10,
         "brand":"Parmalat",
-        "price":2
+        "price":2,
+        "id":1
     },
     {
         "name":"Cioccolato",
         "weight":5,
         "brand":"Milka",
-        "price":1
+        "price":1,
+        "id":2
     }
 ]
