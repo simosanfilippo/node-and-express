@@ -1,0 +1,15 @@
+
+[
+    {
+        "name":"Latte",
+        "weight":10,
+        "brand":"Parmalat",
+        "price":2
+    },
+    {
+        "name":"Cioccolato",
+        "weight":5,
+        "brand":"Milka",
+        "price":1
+    }
+]
