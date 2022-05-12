@@ -23,3 +23,6 @@ app.get('/api/products/:productId', async (req, res) => {
 
 const port = 8080
 app.listen(port, () => console.log(`listening on ${port}`))
+
+const wiki = require('./wiki.js');
+app.use('/wiki', wiki);
