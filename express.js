@@ -10,7 +10,7 @@ app.use('/api/products/', productsRoute);
 var db = require("./database.js")
 
 app.get("/api/prodottiDB", (req, res, next) => {
-    var sql = "select * from user"
+    var sql = "select * from product"
     var params = []
     db.all(sql, params, (err, rows) => {
         if (err) {

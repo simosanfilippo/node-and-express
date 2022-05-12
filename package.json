@@ -128,7 +128,6 @@
     "make-fetch-happen": "^9.1.0",
     "make-dir": "^3.1.0",
     "merge-descriptors": "^1.0.1",
-    "md5": "^2.3.0",
     "methods": "^1.1.2",
     "mime": "^1.6.0",
     "mime-types": "^2.1.35",
