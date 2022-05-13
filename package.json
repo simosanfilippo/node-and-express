@@ -238,7 +238,7 @@
   "scripts": {
     "test": "test",
     "start": "node server.js",
-    "dev":"nodemon express.js"
+    "dev":"nodemon src/express.js"
   },
   "repository": {
     "type": "git",
