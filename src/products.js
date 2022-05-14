@@ -9,14 +9,14 @@ router.get('/', async (req, res) => {
   res.status(200).json(products)
 });
 
-// About page route
+// single product route
 router.get('/:productId', async (req, res) => {
   const products = await fsController.readProducts()
-    for (singleproduct of products){  
-      if (singleproduct.id == req.params.productId){
-          res.status(200).json(singleproduct)
-      }  
-    }
+  for (singleproduct of products){  
+    if (singleproduct.id == req.params.productId){
+        res.status(200).json(singleproduct)
+    }  
+  }
   res.status(204).end()
 });
 
