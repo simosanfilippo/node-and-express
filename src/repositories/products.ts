@@ -10,4 +10,10 @@ export class ProductRepository {
             data,
         })
     }
+    list = async (params: { take: number; skip: number }) => {
+        return await this.client.product.findMany(params)
+    }
+    count = async () => {
+        return await this.client.product.count()
+    }
 }

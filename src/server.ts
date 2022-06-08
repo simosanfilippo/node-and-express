@@ -21,5 +21,17 @@ app.post('/api/v1/products', async (req: any, res: any) => {
         res.status(500).json(`Error: ${e}`)
     }
 })
+app.get('/api/v1/products', async (req: any, res: any) => {
+    try {
+        const service = new ProductService()
+        const results = await service.list({
+            skip: req.query.skip,
+            take: req.query.take,
+        })
 
+        res.status(200).json(results)
+    } catch (e) {
+        res.status(500).json(`Error: ${e}`)
+    }
+})
 app.listen(port, () => console.log(`listening on ${port}`))
