@@ -27,8 +27,8 @@ app.get('/api/v1/products', async (req: any, res: any) => {
             skip: req.query.skip,
             take: req.query.take,
             orderBy: req.query.orderBy,
+            orderDirection: req.query.orderDirection,
         })
-
         res.status(200).json(results)
     } catch (e) {
         res.status(500).json(`Error: ${e}`)

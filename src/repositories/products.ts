@@ -10,13 +10,17 @@ export class ProductRepository {
             data,
         })
     }
-    list = async (params: { take: number; skip: number; orderBy: string }) => {
-        const { take, skip, orderBy } = params
-
+    list = async (params: {
+        take: number
+        skip: number
+        orderBy: string
+        orderDirection: string
+    }) => {
+        const { take, skip, orderBy, orderDirection } = params
         return await this.client.product.findMany({
             take,
             skip,
-            orderBy: { [orderBy]: 'asc' },
+            orderBy: { [orderBy]: orderDirection },
         })
     }
     count = async () => {
