@@ -14,19 +14,25 @@ export class ProductService {
 
         return await this.repository.create(product)
     }
-    list = async (params: { take?: string; skip?: string }) => {
+    list = async (params: {
+        take?: string
+        skip?: string
+        orderBy?: string
+    }) => {
         const take = parseInt(params.take ?? '2')
         const skip = parseInt(params.skip ?? '0')
+        const orderBy = params.orderBy ?? 'name'
         const data = await this.repository.list({
             take,
             skip,
+            orderBy,
         })
         const count = await this.repository.count()
         return { data, paging: { total: count } }
     }
-    getOne = async (params: { id: string }) => {
+    findUnique = async (params: { id: string }) => {
         const id = params.id
-        const data = await this.repository.getOne({ id })
+        const data = await this.repository.findUnique({ id })
         return data
     }
 }

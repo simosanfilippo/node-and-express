@@ -26,6 +26,7 @@ app.get('/api/v1/products', async (req: any, res: any) => {
         const results = await service.list({
             skip: req.query.skip,
             take: req.query.take,
+            orderBy: req.query.orderBy,
         })
 
         res.status(200).json(results)
@@ -36,7 +37,7 @@ app.get('/api/v1/products', async (req: any, res: any) => {
 app.get('/api/v1/product/:id', async (req: any, res: any) => {
     try {
         const service = new ProductService()
-        const result = await service.getOne({
+        const result = await service.findUnique({
             id: req.params.id,
         })
         res.status(200).json(result)
