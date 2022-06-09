@@ -24,4 +24,9 @@ export class ProductService {
         const count = await this.repository.count()
         return { data, paging: { total: count } }
     }
+    getOne = async (params: { id: string }) => {
+        const id = params.id
+        const data = await this.repository.getOne({ id })
+        return data
+    }
 }

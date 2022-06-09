@@ -16,4 +16,11 @@ export class ProductRepository {
     count = async () => {
         return await this.client.product.count()
     }
+    getOne = async (params: { id: string }) => {
+        return await this.client.product.findUnique({
+            where: {
+                id: params.id,
+            },
+        })
+    }
 }

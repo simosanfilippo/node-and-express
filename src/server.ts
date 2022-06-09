@@ -12,7 +12,6 @@ app.use(express.json())
 
 app.post('/api/v1/products', async (req: any, res: any) => {
     try {
-        console.log('server risponde')
         const service = new ProductService()
         const result = await service.create(req.body)
 
@@ -30,6 +29,17 @@ app.get('/api/v1/products', async (req: any, res: any) => {
         })
 
         res.status(200).json(results)
+    } catch (e) {
+        res.status(500).json(`Error: ${e}`)
+    }
+})
+app.get('/api/v1/product/:id', async (req: any, res: any) => {
+    try {
+        const service = new ProductService()
+        const result = await service.getOne({
+            id: req.params.id,
+        })
+        res.status(200).json(result)
     } catch (e) {
         res.status(500).json(`Error: ${e}`)
     }
