@@ -40,7 +40,12 @@ app.get('/api/v1/product/:id', async (req: any, res: any) => {
         const result = await service.findUnique({
             id: req.params.id,
         })
-        res.status(200).json(result)
+        console.log(result)
+        if (result) {
+            res.status(200).json({ result })
+        } else {
+            res.status(404).json({ error: 'Product not found' })
+        }
     } catch (e) {
         res.status(500).json(`Error: ${e}`)
     }
