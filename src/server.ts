@@ -34,18 +34,19 @@ app.get('/api/v1/products', async (req: any, res: any) => {
         res.status(500).json(`Error: ${e}`)
     }
 })
-app.get('/api/v1/product/:id', async (req: any, res: any) => {
+app.get('/api/v1/products/:id', async (req: any, res: any) => {
     try {
         const service = new ProductService()
         const result = await service.findUnique({
             id: req.params.id,
         })
         console.log(result)
+
         if (result) {
-            res.status(200).json({ result })
-        } else {
-            res.status(404).json({ error: 'Product not found' })
+            return res.status(200).json({ result })
         }
+
+        res.status(404).json({ error: 'Product not found' })
     } catch (e) {
         res.status(500).json(`Error: ${e}`)
     }
