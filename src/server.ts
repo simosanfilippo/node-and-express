@@ -61,7 +61,7 @@ app.delete('/api/v1/products/:id', async (req: any, res: any) => {
         })
 
         if (result) {
-            return res.status(200).json(result)
+            return res.status(202).json(result)
         }
 
         res.status(404).json({ error: 'Product not found' })
