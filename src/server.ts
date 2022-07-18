@@ -1,7 +1,6 @@
 import express from 'express'
 const app = express()
 
-import { DatabaseInstance } from './database'
 import { ProductService } from './services/products'
 const port = 8080
 
@@ -20,6 +19,7 @@ app.post('/api/v1/products', async (req: any, res: any) => {
         res.status(500).json(`Error: ${e}`)
     }
 })
+
 app.get('/api/v1/products', async (req: any, res: any) => {
     try {
         const service = new ProductService()
@@ -34,16 +34,34 @@ app.get('/api/v1/products', async (req: any, res: any) => {
         res.status(500).json(`Error: ${e}`)
     }
 })
+
 app.get('/api/v1/products/:id', async (req: any, res: any) => {
     try {
         const service = new ProductService()
         const result = await service.findUnique({
             id: req.params.id,
         })
-        console.log(result)
+        //console.log(result)
 
         if (result) {
-            return res.status(200).json({ result })
+            return res.status(200).json(result)
+        }
+
+        res.status(404).json({ error: 'Product not found' })
+    } catch (e) {
+        res.status(500).json(`Error: ${e}`)
+    }
+})
+
+app.delete('/api/v1/products/:id', async (req: any, res: any) => {
+    try {
+        const service = new ProductService()
+        const result = await service.delete({
+            id: req.params.id,
+        })
+
+        if (result) {
+            return res.status(200).json(result)
         }
 
         res.status(404).json({ error: 'Product not found' })

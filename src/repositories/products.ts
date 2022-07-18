@@ -33,4 +33,11 @@ export class ProductRepository {
             },
         })
     }
+    delete = async (params: { id: string }) => {
+        return await this.client.product.delete({
+            where: {
+                id: params.id,
+            },
+        })
+    }
 }

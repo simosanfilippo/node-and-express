@@ -1,6 +1,6 @@
 datasource db {
-  provider = "sqlite"
-  url      = "file:../../db.sqlite"
+  provider = "postgresql"
+  url      = "postgresql://postgres:sempresolidi@localhost:5432/formazione"
 }
 
 generator client {

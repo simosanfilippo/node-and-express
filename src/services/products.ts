@@ -36,4 +36,9 @@ export class ProductService {
         const data = await this.repository.findUnique({ id })
         return data
     }
+    delete = async (params: { id: string }) => {
+        const id = params.id
+        const data = await this.repository.delete({ id })
+        return data
+    }
 }
