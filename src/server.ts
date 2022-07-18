@@ -2,6 +2,9 @@ import express from 'express'
 const app = express()
 
 import { ProductService } from './services/products'
+import { CategoryService } from './services/categories'
+import { prismaUtility } from './utilities/prismaUtility'
+
 const port = 8080
 
 app.use(express.json())
@@ -16,6 +19,7 @@ app.post('/api/v1/products', async (req: any, res: any) => {
 
         res.status(201).json(result)
     } catch (e) {
+        prismaUtility.resolveError(e)
         res.status(500).json(`Error: ${e}`)
     }
 })
@@ -66,7 +70,20 @@ app.delete('/api/v1/products/:id', async (req: any, res: any) => {
 
         res.status(404).json({ error: 'Product not found' })
     } catch (e) {
+        console.log(e)
         res.status(500).json(`Error: ${e}`)
     }
 })
+
+app.post('/api/v1/categories', async (req: any, res: any) => {
+    try {
+        const service = new CategoryService()
+        const result = await service.create(req.body)
+
+        res.status(201).json(result)
+    } catch (e) {
+        res.status(500).json(`Error: ${e}`)
+    }
+})
+
 app.listen(port, () => console.log(`listening on ${port}`))
