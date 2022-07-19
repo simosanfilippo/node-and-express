@@ -7,7 +7,6 @@ export class CategoryService {
         this.repository = new CategoryRepository()
     }
     create = async (params: any) => {
-        //console.log(JSON.stringify(params));
         const category: Prisma.CategoryCreateInput =
             Prisma.validator<Prisma.CategoryCreateInput>()(params)
         return await this.repository.create(category)
@@ -18,7 +17,7 @@ export class CategoryService {
         orderBy?: string
         orderDirection?: string
     }) => {
-        const take = parseInt(params.take ?? '2')
+        const take = parseInt(params.take ?? '10')
         const skip = parseInt(params.skip ?? '0')
         const orderBy = params.orderBy ?? 'name'
         const orderDirection = params.orderDirection ?? 'asc'
