@@ -35,6 +35,7 @@ app.patch('/api/v1/products/:id', async (req: any, res: any) => {
 
         res.status(200).json(result)
     } catch (e) {
+        console.log(e)
         res.status(500).json(`Error: ${e}`)
     }
 })
