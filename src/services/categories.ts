@@ -35,6 +35,11 @@ export class CategoryService {
         const data = await this.repository.findUnique({ id })
         return data
     }
+    relatedProducts = async (params: { id: string }) => {
+        const id = params.id
+        const data = await this.repository.relatedProducts({ id })
+        return data
+    }
     delete = async (params: { id: string }) => {
         const id = params.id
         const data = await this.repository.delete({ id })

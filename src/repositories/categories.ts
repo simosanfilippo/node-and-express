@@ -23,6 +23,7 @@ export class CategoryRepository {
             orderBy: { [orderBy]: orderDirection },
         })
     }
+
     count = async () => {
         return await this.client.category.count()
     }
@@ -31,6 +32,12 @@ export class CategoryRepository {
             where: {
                 id: params.id,
             },
+        })
+    }
+    relatedProducts = async (params: { id: string }) => {
+        return await this.client.category.findUnique({
+            where: { id: params.id },
+            include: { Product: true },
         })
     }
     delete = async (params: { id: string }) => {

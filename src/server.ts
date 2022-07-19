@@ -24,7 +24,20 @@ app.post('/api/v1/products', async (req: any, res: any) => {
         res.status(500).json(`Error: ${e}`)
     }
 })
+app.patch('/api/v1/products/:id', async (req: any, res: any) => {
+    try {
+        const service = new ProductService()
 
+        const result = await service.update({
+            id: req.params.id,
+            data: req.body,
+        })
+
+        res.status(201).json(result)
+    } catch (e) {
+        res.status(500).json(`Error: ${e}`)
+    }
+})
 app.get('/api/v1/products', async (req: any, res: any) => {
     try {
         const service = new ProductService()
@@ -99,6 +112,23 @@ app.get('/api/v1/categories', async (req: any, res: any) => {
             orderDirection: req.query.orderDirection,
         })
         res.status(200).json(results)
+    } catch (e) {
+        res.status(500).json(`Error: ${e}`)
+    }
+})
+
+app.get('/api/v1/category/:id/products', async (req: any, res: any) => {
+    try {
+        const service = new CategoryService()
+        const result = await service.relatedProducts({
+            id: req.params.id,
+        })
+
+        if (result) {
+            return res.status(200).json(result)
+        }
+
+        res.status(404).json({ error: 'Category not found' })
     } catch (e) {
         res.status(500).json(`Error: ${e}`)
     }

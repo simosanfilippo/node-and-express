@@ -33,6 +33,17 @@ export class ProductRepository {
             },
         })
     }
+    update = async (params: {
+        id: string
+        product: Prisma.ProductUpdateInput
+    }) => {
+        return await this.client.product.update({
+            where: {
+                id: params.id,
+            },
+            data: params.product,
+        })
+    }
     delete = async (params: { id: string }) => {
         return await this.client.product.delete({
             where: {
