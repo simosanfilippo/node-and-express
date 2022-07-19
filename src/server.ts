@@ -33,7 +33,7 @@ app.patch('/api/v1/products/:id', async (req: any, res: any) => {
             data: req.body,
         })
 
-        res.status(201).json(result)
+        res.status(200).json(result)
     } catch (e) {
         res.status(500).json(`Error: ${e}`)
     }
