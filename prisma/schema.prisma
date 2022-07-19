@@ -24,3 +24,10 @@ model Category {
   description String?
   Product     Product[]
 }
+
+model User {
+  id       String  @id @default(uuid())
+  name     String?
+  mail     String
+  password String
+}
