@@ -31,9 +31,6 @@ export class CategoryRepository {
             where: {
                 id: params.id,
             },
-            include: {
-                Product: true,
-            },
         })
     }
     delete = async (params: { id: string }) => {
