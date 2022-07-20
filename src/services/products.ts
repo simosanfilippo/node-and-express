@@ -18,7 +18,7 @@ export class ProductService {
         orderBy?: string
         orderDirection?: string
     }) => {
-        const take = parseInt(params.take ?? '2')
+        const take = parseInt(params.take ?? '10')
         const skip = parseInt(params.skip ?? '0')
         const orderBy = params.orderBy ?? 'name'
         const orderDirection = params.orderDirection ?? 'asc'
