@@ -14,6 +14,8 @@ app.use(express.json())
 // const productRoutes = require('./router.js');
 // app.use('/api/products/', productRoutes);
 
+/* Product */
+
 app.post('/api/v1/products', async (req: any, res: any) => {
     try {
         const service = new ProductService()
@@ -21,21 +23,6 @@ app.post('/api/v1/products', async (req: any, res: any) => {
 
         res.status(201).json(result)
     } catch (e) {
-        res.status(500).json(`Error: ${e}`)
-    }
-})
-app.patch('/api/v1/products/:id', async (req: any, res: any) => {
-    try {
-        const service = new ProductService()
-
-        const result = await service.update({
-            id: req.params.id,
-            data: req.body,
-        })
-
-        res.status(200).json(result)
-    } catch (e) {
-        console.log(e)
         res.status(500).json(`Error: ${e}`)
     }
 })
@@ -71,7 +58,21 @@ app.get('/api/v1/products/:id', async (req: any, res: any) => {
         res.status(500).json(`Error: ${e}`)
     }
 })
+app.patch('/api/v1/products/:id', async (req: any, res: any) => {
+    try {
+        const service = new ProductService()
 
+        const result = await service.update({
+            id: req.params.id,
+            data: req.body,
+        })
+
+        res.status(200).json(result)
+    } catch (e) {
+        console.log(e)
+        res.status(500).json(`Error: ${e}`)
+    }
+})
 app.delete('/api/v1/products/:id', async (req: any, res: any) => {
     try {
         const service = new ProductService()
@@ -91,6 +92,8 @@ app.delete('/api/v1/products/:id', async (req: any, res: any) => {
         res.status(error?.statusCode).json(`Error: ${error?.errorBody}`)
     }
 })
+
+/* Category */
 
 app.post('/api/v1/categories', async (req: any, res: any) => {
     try {
@@ -152,7 +155,21 @@ app.get('/api/v1/categories/:id', async (req: any, res: any) => {
         res.status(500).json(`Error: ${e}`)
     }
 })
+app.patch('/api/v1/categories/:id', async (req: any, res: any) => {
+    try {
+        const service = new CategoryService()
 
+        const result = await service.update({
+            id: req.params.id,
+            data: req.body,
+        })
+
+        res.status(200).json(result)
+    } catch (e) {
+        console.log(e)
+        res.status(500).json(`Error: ${e}`)
+    }
+})
 app.delete('/api/v1/categories/:id', async (req: any, res: any) => {
     try {
         const service = new CategoryService()

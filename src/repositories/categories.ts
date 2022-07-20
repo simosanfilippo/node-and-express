@@ -40,6 +40,17 @@ export class CategoryRepository {
             include: { Product: true },
         })
     }
+    update = async (params: {
+        id: string
+        category: Prisma.CategoryUpdateInput
+    }) => {
+        return await this.client.category.update({
+            where: {
+                id: params.id,
+            },
+            data: params.category,
+        })
+    }
     delete = async (params: { id: string }) => {
         return await this.client.category.delete({
             where: {
