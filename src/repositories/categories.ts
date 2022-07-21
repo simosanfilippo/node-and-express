@@ -34,12 +34,6 @@ export class CategoryRepository {
             },
         })
     }
-    relatedProducts = async (params: { id: string }) => {
-        return await this.client.category.findUnique({
-            where: { id: params.id },
-            include: { Product: true },
-        })
-    }
     update = async (params: {
         id: string
         category: Prisma.CategoryUpdateInput

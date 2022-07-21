@@ -123,9 +123,9 @@ app.get('/api/v1/categories', async (req: any, res: any) => {
 
 app.get('/api/v1/category/:id/products', async (req: any, res: any) => {
     try {
-        const service = new CategoryService()
-        const result = await service.relatedProducts({
-            id: req.params.id,
+        const service = new ProductService()
+        const result = await service.list({
+            property: { categoryId: req.params.id },
         })
 
         if (result) {

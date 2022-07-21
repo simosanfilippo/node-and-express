@@ -1,10 +1,10 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider = "postgresql"
   url      = "postgresql://postgres:sempresolidi@localhost:5432/formazione"
-}
-
-generator client {
-  provider = "prisma-client-js"
 }
 
 model Product {
@@ -14,8 +14,8 @@ model Product {
   brand      String?
   price      Int
   createdAt  DateTime  @default(now())
-  Category   Category? @relation(fields: [categoryId], references: [id])
   categoryId String?
+  Category   Category? @relation(fields: [categoryId], references: [id])
 }
 
 model Category {

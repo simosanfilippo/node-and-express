@@ -35,11 +35,6 @@ export class CategoryService {
         const data = await this.repository.findUnique({ id })
         return data
     }
-    relatedProducts = async (params: { id: string }) => {
-        const id = params.id
-        const data = await this.repository.relatedProducts({ id })
-        return data
-    }
     update = async (params: { id: string; data: any }) => {
         const id = params.id
         const category: Prisma.CategoryUpdateInput =
