@@ -83,8 +83,6 @@ app.delete('/api/v1/products/:id', async (req: any, res: any) => {
         if (result) {
             return res.status(202).json(result)
         }
-
-        res.status(404).json({ error: 'Product not found' })
     } catch (e) {
         console.log(e)
         console.log(typeof e)
@@ -184,7 +182,9 @@ app.delete('/api/v1/categories/:id', async (req: any, res: any) => {
         res.status(404).json({ error: 'Product not found' })
     } catch (e) {
         console.log(e)
-        res.status(500).json(`Error: ${e}`)
+        console.log(typeof e)
+        const error = utility.resolveError(e)
+        res.status(error?.statusCode).json(`Error: ${error?.errorBody}`)
     }
 })
 

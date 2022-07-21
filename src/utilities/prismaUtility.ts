@@ -16,7 +16,7 @@ export class PrismaUtility {
                 statusCode: this.statusCode,
                 errorBody: JSON.stringify(this.errorBody),
             }
-            throw e
         }
+        throw e
     }
 }
