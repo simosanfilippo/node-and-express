@@ -8,7 +8,8 @@
         "tscw": "./node_modules/typescript/bin/tsc -w",
         "dev": "nodemon ./dist/server.js",
         "db:push": "prisma db push",
-        "db:pull": "prisma db pull"
+        "db:pull": "prisma db pull",
+        "prismaVersion": "prisma --version"
     },
     "repository": {
         "type": "git",
