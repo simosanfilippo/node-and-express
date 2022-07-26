@@ -6,6 +6,7 @@ import { PrismaUtility } from './utilities/prismaUtility'
 
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
+
 const utility = new PrismaUtility()
 
 const port = 8080
@@ -194,6 +195,7 @@ app.post('/api/v1/login', (req, res) => {
     const username = req.body.username
     const user = { name: username }
 
-    jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
+    const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
+    res.json({ accessToken: accessToken })
 })
 app.listen(port, () => console.log(`listening on ${port}`))
