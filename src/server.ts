@@ -4,6 +4,8 @@ import { ProductService } from './services/products'
 import { CategoryService } from './services/categories'
 import { PrismaUtility } from './utilities/prismaUtility'
 
+const jwt = require('jsonwebtoken')
+require('dotenv').config()
 const utility = new PrismaUtility()
 
 const port = 8080
@@ -187,4 +189,11 @@ app.delete('/api/v1/categories/:id', async (req: any, res: any) => {
     }
 })
 
+//authentication
+app.post('/api/v1/login', (req, res) => {
+    const username = req.body.username
+    const user = { name: username }
+
+    jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
+})
 app.listen(port, () => console.log(`listening on ${port}`))

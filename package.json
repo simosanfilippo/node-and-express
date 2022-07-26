@@ -9,7 +9,8 @@
         "dev": "nodemon ./dist/server.js",
         "db:push": "prisma db push",
         "db:pull": "prisma db pull",
-        "prismaVersion": "prisma --version"
+        "prismaVersion": "prisma --version",
+        "randomByte": "node ./dist/randomByte.js"
     },
     "repository": {
         "type": "git",
