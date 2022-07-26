@@ -1,6 +1,5 @@
 import express from 'express'
 const app = express()
-const passport = require('./passport')
 import { ProductService } from './services/products'
 import { CategoryService } from './services/categories'
 import { PrismaUtility } from './utilities/prismaUtility'
@@ -10,11 +9,6 @@ const utility = new PrismaUtility()
 const port = 8080
 
 app.use(express.json())
-const auth = require('./routes/auth')
-const user = require('./routes/user')
-
-app.use('/auth', auth)
-app.use('/user', passport.authenticate('jwt', { session: false }), user)
 
 // const productRoutes = require('./router.js');
 // app.use('/api/products/', productRoutes);
