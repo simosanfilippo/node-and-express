@@ -209,7 +209,8 @@ function authenticateToken(req: any, res: any, next: any) {
     )
 }
 
-app.post('api/v1/users', async (req: any, res: any) => {
+app.post('/api/v1/users', async (req: any, res: any) => {
+    console.log(req.body)
     try {
         const service = new UserService()
         const result = await service.create(req.body)
