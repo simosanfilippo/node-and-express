@@ -11,7 +11,6 @@ app.use(express.json())
 let refreshTokens: any = []
 
 app.post('/api/v1/token', (req: any, res: any) => {
-    console.log(refreshTokens)
     const refreshToken = req.body.token
     if (refreshToken == null) return res.sendStatus(401)
     if (!refreshTokens.includes(refreshToken)) return res.sendStatus(403)
