@@ -1,11 +1,13 @@
+require('dotenv').config()
+
 import express from 'express'
 const app = express()
+
 import { ProductService } from './services/products'
 import { CategoryService } from './services/categories'
 import { PrismaUtility } from './utilities/prismaUtility'
 
 const jwt = require('jsonwebtoken')
-require('dotenv').config()
 
 const utility = new PrismaUtility()
 
@@ -28,7 +30,7 @@ app.post('/api/v1/products', async (req: any, res: any) => {
         res.status(500).json(`Error: ${e}`)
     }
 })
-app.get('/api/v1/products', async (req: any, res: any) => {
+app.get('/api/v1/products', authenticateToken, async (req: any, res: any) => {
     try {
         const service = new ProductService()
         const results = await service.list({
@@ -190,12 +192,20 @@ app.delete('/api/v1/categories/:id', async (req: any, res: any) => {
     }
 })
 
-//authentication
-app.post('/api/v1/login', (req, res) => {
-    const username = req.body.username
-    const user = { name: username }
+function authenticateToken(req: any, res: any, next: any) {
+    const authHeader = req.headers['authorization']
+    const token = authHeader && authHeader.split(' ')[1]
+    if (token == null) return res.sendStatus(401)
 
-    const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
-    res.json({ accessToken: accessToken })
-})
+    jwt.verify(
+        token,
+        process.env.ACCESS_TOKEN_SECRET,
+        (err: any, user: any) => {
+            if (err) return res.sendStatus(403)
+            req.user = user
+            next()
+        }
+    )
+}
+
 app.listen(port, () => console.log(`listening on ${port}`))

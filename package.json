@@ -10,7 +10,8 @@
         "db:push": "prisma db push",
         "db:pull": "prisma db pull",
         "prismaVersion": "prisma --version",
-        "randomByte": "node ./dist/randomByte.js"
+        "randomByte": "node ./dist/randomByte.js",
+        "devAuth": "nodemon ./dist/authServer.js"
     },
     "repository": {
         "type": "git",
