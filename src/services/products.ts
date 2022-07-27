@@ -7,7 +7,6 @@ export class ProductService {
         this.repository = new ProductRepository()
     }
     create = async (params: any) => {
-        //console.log(JSON.stringify(params));
         const product: Prisma.ProductCreateInput =
             Prisma.validator<Prisma.ProductCreateInput>()(params)
         return await this.repository.create(product)

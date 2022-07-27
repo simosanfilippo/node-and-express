@@ -10,6 +10,20 @@ app.use(express.json())
 
 let refreshTokens: any = []
 
+//Authentication
+app.post('/api/v1/login', (req, res) => {
+    const username = req.body.username
+    const user = { name: username }
+
+    const accessToken = generateAccessToken(user)
+    const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
+    refreshTokens.push(refreshToken)
+    res.json({ accessToken: accessToken, refreshToken: refreshToken })
+})
+
+function generateAccessToken(user: any) {
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1m' })
+}
 app.post('/api/v1/token', (req: any, res: any) => {
     const refreshToken = req.body.token
     if (refreshToken == null) return res.sendStatus(401)
@@ -31,20 +45,5 @@ app.delete('/api/v1/logout', (req: any, res: any) => {
     )
     res.sendStatus(204)
 })
-
-//Authentication
-app.post('/api/v1/login', (req, res) => {
-    const username = req.body.username
-    const user = { name: username }
-
-    const accessToken = generateAccessToken(user)
-    const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
-    refreshTokens.push(refreshToken)
-    res.json({ accessToken: accessToken, refreshToken: refreshToken })
-})
-
-function generateAccessToken(user: any) {
-    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1m' })
-}
 
 app.listen(port, () => console.log(`listening on ${port}`))

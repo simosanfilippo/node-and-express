@@ -28,6 +28,6 @@ model Category {
 model User {
   id       String  @id @default(uuid())
   name     String?
-  mail     String
+  email    String  @unique
   password String
 }

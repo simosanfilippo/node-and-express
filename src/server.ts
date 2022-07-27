@@ -5,6 +5,7 @@ const app = express()
 
 import { ProductService } from './services/products'
 import { CategoryService } from './services/categories'
+import { UserService } from './services/users'
 import { PrismaUtility } from './utilities/prismaUtility'
 
 const jwt = require('jsonwebtoken')
@@ -207,5 +208,16 @@ function authenticateToken(req: any, res: any, next: any) {
         }
     )
 }
+
+app.post('api/v1/users', async (req: any, res: any) => {
+    try {
+        const service = new UserService()
+        const result = await service.create(req.body)
+
+        res.status(201).json(result)
+    } catch (e) {
+        res.status(500).json(`Error: ${e}`)
+    }
+})
 
 app.listen(port, () => console.log(`listening on ${port}`))
