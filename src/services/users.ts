@@ -45,4 +45,10 @@ export class UserService {
         const count = await this.repository.count({ property })
         return { data, paging: { total: count } }
     }
+    verifyPassword = async (params: { email: string; password: string }) => {
+        const email = params.email
+        const password = params.password
+        const data = await this.repository.verifyPassword({ email, password })
+        return data
+    }
 }

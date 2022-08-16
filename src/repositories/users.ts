@@ -47,4 +47,18 @@ export class UserRepository {
             },
         })
     }
+    verifyPassword = async (params: { email: string; password: string }) => {
+        return await this.client.user.findFirst({
+            where: {
+                AND: [
+                    {
+                        email: params.email,
+                    },
+                    {
+                        password: params.password,
+                    },
+                ],
+            },
+        })
+    }
 }

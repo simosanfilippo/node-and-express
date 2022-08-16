@@ -1,5 +1,7 @@
 require('dotenv').config()
 
+import { UserService } from './services/users'
+
 import express from 'express'
 const app = express()
 const jwt = require('jsonwebtoken')
@@ -11,14 +13,33 @@ app.use(express.json())
 let refreshTokens: any = []
 
 //Authentication
-app.post('/api/v1/login', (req, res) => {
+app.post('/api/v1/login', async (req, res) => {
     const email = req.body.email
-    const user = { email: email }
+    const password = req.body.password
+    const user = { email: email, password: password }
+    try {
+        const service = new UserService()
+        const result = await service.verifyPassword({
+            email,
+            password,
+        })
+        if (result) {
+            const accessToken = generateAccessToken(user)
+            const refreshToken = jwt.sign(
+                user,
+                process.env.REFRESH_TOKEN_SECRET
+            )
+            refreshTokens.push(refreshToken)
+            return res.json({
+                accessToken: accessToken,
+                refreshToken: refreshToken,
+            })
+        }
 
-    const accessToken = generateAccessToken(user)
-    const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
-    refreshTokens.push(refreshToken)
-    res.json({ accessToken: accessToken, refreshToken: refreshToken })
+        res.status(404).json({ error: 'User not found or wrong password' })
+    } catch (e) {
+        res.status(500).json(`Error: ${e}`)
+    }
 })
 
 function generateAccessToken(user: any) {
