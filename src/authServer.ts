@@ -12,8 +12,8 @@ let refreshTokens: any = []
 
 //Authentication
 app.post('/api/v1/login', (req, res) => {
-    const username = req.body.username
-    const user = { name: username }
+    const email = req.body.email
+    const user = { email: email }
 
     const accessToken = generateAccessToken(user)
     const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
@@ -22,7 +22,7 @@ app.post('/api/v1/login', (req, res) => {
 })
 
 function generateAccessToken(user: any) {
-    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1m' })
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '10s' })
 }
 app.post('/api/v1/token', (req: any, res: any) => {
     const refreshToken = req.body.token

@@ -208,7 +208,7 @@ function authenticateToken(req: any, res: any, next: any) {
         }
     )
 }
-
+/* User */
 app.post('/api/v1/users', async (req: any, res: any) => {
     console.log(req.body)
     try {
@@ -216,6 +216,21 @@ app.post('/api/v1/users', async (req: any, res: any) => {
         const result = await service.create(req.body)
 
         res.status(201).json(result)
+    } catch (e) {
+        res.status(500).json(`Error: ${e}`)
+    }
+})
+
+app.get('/api/v1/users', async (req: any, res: any) => {
+    try {
+        const service = new UserService()
+        const results = await service.list({
+            skip: req.query.skip,
+            take: req.query.take,
+            orderBy: req.query.orderBy,
+            orderDirection: req.query.orderDirection,
+        })
+        res.status(200).json(results)
     } catch (e) {
         res.status(500).json(`Error: ${e}`)
     }

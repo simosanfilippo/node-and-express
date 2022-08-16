@@ -1,5 +1,5 @@
 GET http://localhost:8080/api/v1/products
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiU2ltb25lIiwiaWF0IjoxNjU4OTA4MDMzLCJleHAiOjE2NTg5MDgwOTN9.M0ZhJtKw0OsQtSUGs3QgR2IQbbghuCA9-r02S47t8l0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiU2ltb25lIiwiaWF0IjoxNjYwNjY5NjIyLCJleHAiOjE2NjA2Njk2ODJ9.HL9k8Dv-UOF6mkPDDSowfUH6_tbgBobRKQtXKDv3qd4
 
 ###
 
@@ -16,7 +16,7 @@ POST  http://localhost:4000/api/v1/token
 Content-Type: application/json
 
 {
-    "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiU2ltb25lIiwiaWF0IjoxNjU4OTA4MDIxfQ.g4n-bBbyCaVJPTnkcMdFt8JkMrQ_js4iwUuu0JYG0ig"
+    "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiU2ltb25lIiwiaWF0IjoxNjYwNjY5ODQxfQ.olP2LWxg8uv2_wFshtpjsh4LMTjOnv0-UZJQq_JflG4"
 }
 
 ###

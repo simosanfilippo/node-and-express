@@ -21,4 +21,28 @@ export class UserService {
         const data = await this.repository.delete({ id })
         return data
     }
+    list = async (params: {
+        take?: string
+        skip?: string
+        orderBy?: string
+        orderDirection?: string
+        property?: { [key: string]: string }
+    }) => {
+        const take = parseInt(params.take ?? '10')
+        const skip = parseInt(params.skip ?? '0')
+        const orderBy = params.orderBy ?? 'name'
+        const orderDirection = params.orderDirection ?? 'asc'
+        const property = params.property
+
+        const data = await this.repository.list({
+            take,
+            skip,
+            orderBy,
+            orderDirection,
+            property,
+        })
+
+        const count = await this.repository.count({ property })
+        return { data, paging: { total: count } }
+    }
 }
